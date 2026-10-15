@@ -183,8 +183,11 @@ resolve_system_name() {
     key="$(echo "$raw" | tr '[:upper:]' '[:lower:]' | sed -E 's/^[[:space:]._-]+//; s/[[:space:]_-]+$//; s/[[:space:]_-]+/ /g')"
 
     case "$key" in
-        nes|fc|famicom|fds|"family computer"|"nintendo entertainment system"|"nintendo nes"|"nes headered"|"nintendo entertainment system (headered)"|unf|nez)
+        nes|fc|famicom|"family computer"|"nintendo entertainment system"|"nintendo nes"|"nes headered"|"nintendo entertainment system (headered)"|unf|nez)
             echo "Nintendo - Nintendo Entertainment System (Headered)"
+            ;;
+        fds|"famicom disk system"|"family computer disk system"|"nintendo family computer disk system"|"family computer disk system (fds)"|qd)
+            echo "Nintendo - Family Computer Disk System (FDS)"
             ;;
         snes|sfc|"super nes"|"super nintendo"|"super famicom"|"super nintendo entertainment system"|"nintendo snes"|smc|swc|fig|bs)
             echo "Nintendo - Super Nintendo Entertainment System"
@@ -213,6 +216,39 @@ resolve_system_name() {
         sms|sg|mastersystem|"master system"|"mark iii"|"mark 3"|mk3|"sega master system"|"sega mark iii"|"master system mark iii")
             echo "Sega - Master System - Mark III"
             ;;
+        gg|gamegear|"game gear"|"sega game gear"|"sega gamegear")
+            echo "Sega - Game Gear"
+            ;;
+        pico|"sega pico")
+            echo "Sega - PICO"
+            ;;
+        amiga|"commodore amiga"|adf|ipf|lha|hdf)
+            echo "Commodore - Amiga"
+            ;;
+        c64|"commodore 64"|"commodore c64"|d64|t64|prg|crt|g64)
+            echo "Commodore - Commodore 64"
+            ;;
+        vic20|"vic 20"|"commodore vic 20"|"commodore vic20")
+            echo "Commodore - VIC-20"
+            ;;
+        a2600|2600|"atari 2600"|vcs|"atari vcs"|a26)
+            echo "Atari - 2600"
+            ;;
+        ast|"atari st"|st|ste|stx|msa)
+            echo "Atari - ST"
+            ;;
+        lynx|"atari lynx"|lyx|lnx)
+            echo "Atari - Lynx (LYX)"
+            ;;
+        msx2|"microsoft msx2"|mx2)
+            echo "Microsoft - MSX2"
+            ;;
+        intv|intellivision|"mattel intellivision"|int)
+            echo "Mattel - Intellivision"
+            ;;
+        egg|"project egg"|projectegg)
+            echo "Project EGG"
+            ;;
         *)
             echo ""
             ;;
@@ -232,7 +268,7 @@ elif [[ "$BASENAME_QUERY" =~ ^(.+)\.([a-zA-Z0-9]{2,4})$ ]]; then
     CAND_EXT="${BASH_REMATCH[2]}"
     EXT_LOWER="$(echo "$CAND_EXT" | tr '[:upper:]' '[:lower:]')"
     case "$EXT_LOWER" in
-        nes|fc|fds|unf|nez|sfc|smc|swc|fig|bs|gb|sgb|dmg|gbc|cgb|gba|agb|nds|ids|dsi|srl|z64|n64|u64|v64|md|gen|smd|68k|sgd|sms|sg|zip|7z|rom|bin)
+        nes|fc|fds|qd|unf|nez|sfc|smc|swc|fig|bs|gb|sgb|dmg|gbc|cgb|gba|agb|nds|ids|dsi|srl|z64|n64|u64|v64|md|gen|smd|68k|sgd|sms|sg|gg|pico|adf|ipf|lha|hdf|d64|t64|prg|crt|g64|a26|st|stx|msa|lyx|lnx|mx2|int|zip|7z|rom|bin)
             FILE_PREFIX="$CAND_PREFIX"
             INFERRED_EXT="$EXT_LOWER"
             ;;
